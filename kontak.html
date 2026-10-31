@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubungi Kami FIFI's STORE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- HEADER / NAVIGASI -->
+    <header>
+        <div class="container header-wrap">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-gem"></i> FIFI'S STORE
+            </a>
+            
+            <nav>
+                <a href="index.html">Beranda</a>
+                <a href="produk.html">Produk</a>
+                <a href="tentang.html">Tentang</a>
+                <a href="kontak.html" class="active">Kontak</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="btn-icon" onclick="openCartModal()">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Keranjang (<span id="cart-count">0</span>)</span>
+                </button>
+                <button class="btn-icon" onclick="openAuthModal()">
+                    <i class="fa-solid fa-user"></i>
+                    <span id="user-label">Akun</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container page-content">
+        <div class="box-info">
+            <h3 class="section-title">Hubungi Kami</h3>
+            <p class="subtitle-text">
+                Silakan isi formulir di bawah ini untuk mengirimkan pesan atau pertanyaan kepada kami.
+            </p>
+
+            <form id="contactForm" onsubmit="submitContact(event)">
+                <div class="form-group">
+                    <label for="c-nama">Nama Lengkap</label>
+                    <input type="text" id="c-nama" required placeholder="Masukkan nama Anda">
+                </div>
+                <div class="form-group">
+                    <label for="c-email">Alamat Email</label>
+                    <input type="email" id="c-email" required placeholder="nama@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="c-pesan">Pesan</label>
+                    <textarea id="c-pesan" rows="4" required placeholder="Tuliskan pesan Anda..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Kirim Pesan</button>
+            </form>
+
+            <div id="contact-history" class="contact-history-box">
+                <h4 class="history-title">Pesan Terkirim:</h4>
+                <div id="contact-list" class="contact-list-items"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 <strong>FIFI's STORE</strong>. Toko Aksesoris Terpercaya.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL KERANJANG & AKUN SAMA -->
+    <div id="modal-cart" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-bag-shopping"></i> Keranjang Belanja</h3>
+                <button class="close-modal" onclick="closeCartModal()">&times;</button>
+            </div>
+            <div id="cart-items-list"></div>
+            <div id="checkout-form-box" class="hidden">
+                <h4>Data Pengiriman</h4>
+                <div class="form-group">
+                    <label>Nama Penerima</label>
+                    <input type="text" id="co-nama" placeholder="Nama lengkap">
+                </div>
+                <div class="form-group">
+                    <label>Alamat Lengkap</label>
+                    <textarea id="co-alamat" rows="2" placeholder="Alamat tujuan pengiriman"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Metode Pembayaran</label>
+                    <select id="co-bayar">
+                        <option value="qris">QRIS (GoPay, OVO, ShopeePay)</option>
+                        <option value="cod">COD (Bayar di Tempat)</option>
+                        <option value="tf">Transfer Bank (BCA / Mandiri)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <span class="total-label">Total:</span>
+                    <div id="cart-total-price" class="total-price">Rp0</div>
+                </div>
+                <div>
+                    <button id="btn-next-checkout" class="btn-submit" onclick="toggleCheckoutStep(true)">Lanjut Checkout</button>
+                    <button id="btn-finish-pay" class="btn-submit btn-pay hidden" onclick="processPayment()">Bayar Sekarang</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-auth" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-lock"></i> Akun Pembeli</h3>
+                <button class="close-modal" onclick="closeAuthModal()">&times;</button>
+            </div>
+            <div id="auth-status-logged" class="hidden user-box">
+                <p id="user-display-name" class="user-name">User</p>
+                <p id="user-display-email" class="user-email">email@domain.com</p>
+                <button class="btn-submit btn-danger" onclick="userLogout()">Logout</button>
+            </div>
+            <form id="loginForm" onsubmit="userLogin(event)">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="acc-email" required placeholder="Masukkan email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="acc-pass" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-submit full-width">Masuk / Daftar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
